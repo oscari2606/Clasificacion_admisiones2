@@ -1,0 +1,11 @@
+#venv
+venv/
+__pycache__/
+.pyc
+
+#Resultados de ejecuciones
+outputs/*.png
+outputs/*.pdf
+
+# Los datos se descargan actualizados
+data/

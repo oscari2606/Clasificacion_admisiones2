@@ -20,29 +20,37 @@ El flujo principal (`main.py`) está pensado para:
   - `matplotlib`
   - `seaborn`
 
-## Instalación
+## Instalación y puesta en marcha
 
-Desde la raíz del proyecto:
+### 1) Clonar el repositorio
+
+```bash
+git clone https://github.com/oscari2606/Clasificacion_admisiones2.git
+cd Clasificacion_admisiones2
+```
+
+### 2) Crear y activar entorno virtual (venv)
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+> En Windows (PowerShell): `.\.venv\Scripts\Activate.ps1`
+
+### 3) Instalar requerimientos
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Cómo usarlo
-
-### Opción 1: ejecutar el pipeline principal
+### 4) Ejecutar el pipeline principal
 
 ```bash
 python main.py
 ```
 
-### Opción 2: uso práctico mínimo (carga + entrenamiento)
-
-Si quieres validar rápidamente el flujo base:
-
-```bash
-python -c "from src.loader import cargar_y_preparar_datos; from src.model import entrenar_arbol; X_train,X_test,y_train,y_test=cargar_y_preparar_datos(); entrenar_arbol(X_train,y_train); print('Entrenamiento OK')"
-```
+La descarga de datos se realiza automáticamente vía API de Kaggle (a través de `kagglehub`) para mantener el dataset actualizado.
 
 ## Estructura del proyecto
 
@@ -59,9 +67,9 @@ python -c "from src.loader import cargar_y_preparar_datos; from src.model import
 - ✅ Se generan artefactos de salida útiles para evidencia académica:
   - `outputs/01_matriz_confusion.png`
   - `outputs/02_arbol_decision.png`
-- ⚠️ Dependencia externa crítica: la primera ejecución requiere acceso a Kaggle para descargar datos.
+- ✅ La estrategia de datos queda alineada con actualización automática desde Kaggle API.
 - ⚠️ Para ejecución estable en entorno institucional, se recomienda:
-  1. Pre-cargar `data/Admission_Predict.csv` en el servidor.
+  1. Asegurar conectividad y credenciales de Kaggle en el entorno de ejecución.
   2. Ejecutar con entorno virtual y `requirements.txt`.
   3. Definir responsable de validación periódica de métricas del modelo.
 
@@ -74,4 +82,4 @@ python -c "from src.loader import cargar_y_preparar_datos; from src.model import
 - **GitHub Copilot (asistente técnico)**
 - **quitian07 (Esteban Quitian)**
 - **oscari2606 (Oscar Ivan)**
-- **Jhederith**
+- **@jhederith (Jhederith Quitian)**

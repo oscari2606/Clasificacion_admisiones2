@@ -17,45 +17,69 @@ El flujo principal (`main.py`) está pensado para:
   - `pandas`
   - `scikit-learn`
   - `kagglehub`
+  - `matplotlib`
+  - `seaborn`
 
-## Instalación
+## Instalación y puesta en marcha
 
-Desde la raíz del proyecto:
+### 1) Clonar el repositorio
 
 ```bash
-pip install pandas scikit-learn kagglehub
+git clone https://github.com/oscari2606/Clasificacion_admisiones2.git
+cd Clasificacion_admisiones2
 ```
 
-## Cómo usarlo
+### 2) Crear y activar entorno virtual (venv)
 
-### Opción 1: ejecutar el pipeline principal
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+> En Windows (PowerShell): `.\.venv\Scripts\Activate.ps1`
+
+### 3) Instalar requerimientos
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4) Ejecutar el pipeline principal
 
 ```bash
 python main.py
 ```
 
-### Opción 2: uso práctico mínimo (carga + entrenamiento)
-
-Si quieres validar rápidamente el flujo base:
-
-```bash
-python -c "from src.loader import cargar_y_preparar_datos; from src.model import entrenar_arbol; X_train,X_test,y_train,y_test=cargar_y_preparar_datos(); entrenar_arbol(X_train,y_train); print('Entrenamiento OK')"
-```
+La descarga de datos se realiza automáticamente vía API de Kaggle (a través de `kagglehub`) para mantener el dataset actualizado.
 
 ## Estructura del proyecto
 
 - `main.py`: orquesta el pipeline.
 - `src/loader.py`: descarga/carga y prepara el dataset.
 - `src/model.py`: entrenamiento del árbol de decisión.
-- `src/evaluation.py`: módulo destinado a evaluación.
+- `src/evaluation.py`: evaluación de métricas y generación de gráficas.
 - `data/`: almacenamiento local del CSV.
 - `outputs/`: salidas generadas por el pipeline.
 
-## Nota importante
+## Hallazgos de revisión para salida a producción (universidad)
 
-Actualmente `main.py` importa `evaluar_modelo` desde `src/evaluation.py`. Asegúrate de que ese módulo tenga la función implementada para completar el pipeline de punta a punta.
+- ✅ El pipeline principal está completo y funcional en tres etapas: carga/preparación, entrenamiento y evaluación.
+- ✅ Se generan artefactos de salida útiles para evidencia académica:
+  - `outputs/01_matriz_confusion.png`
+  - `outputs/02_arbol_decision.png`
+- ✅ La estrategia de datos queda alineada con actualización automática desde Kaggle API.
+- ⚠️ Para ejecución estable en entorno institucional, se recomienda:
+  1. Asegurar conectividad y credenciales de Kaggle en el entorno de ejecución.
+  2. Ejecutar con entorno virtual y `requirements.txt`.
+  3. Definir responsable de validación periódica de métricas del modelo.
+
+## Estado recomendado
+
+**Listo para despliegue académico/institucional controlado**, con la condición de asegurar disponibilidad del dataset y entorno de ejecución reproducible.
 
 ## Créditos
 
-- Autor original del proyecto: **Jhederith Quitian**
-- README en español y guía de uso: **GitHub Copilot**
+- **GitHub Copilot (asistente técnico)**
+- **quitian07 (Esteban Quitian)**
+- **oscari2606 (Oscar Ivan)**
+- **@jhederith (Jhederith Quitian)**

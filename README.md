@@ -17,13 +17,15 @@ El flujo principal (`main.py`) está pensado para:
   - `pandas`
   - `scikit-learn`
   - `kagglehub`
+  - `matplotlib`
+  - `seaborn`
 
 ## Instalación
 
 Desde la raíz del proyecto:
 
 ```bash
-pip install pandas scikit-learn kagglehub
+pip install -r requirements.txt
 ```
 
 ## Cómo usarlo
@@ -47,15 +49,29 @@ python -c "from src.loader import cargar_y_preparar_datos; from src.model import
 - `main.py`: orquesta el pipeline.
 - `src/loader.py`: descarga/carga y prepara el dataset.
 - `src/model.py`: entrenamiento del árbol de decisión.
-- `src/evaluation.py`: módulo destinado a evaluación.
+- `src/evaluation.py`: evaluación de métricas y generación de gráficas.
 - `data/`: almacenamiento local del CSV.
 - `outputs/`: salidas generadas por el pipeline.
 
-## Nota importante
+## Hallazgos de revisión para salida a producción (universidad)
 
-Actualmente `main.py` importa `evaluar_modelo` desde `src/evaluation.py`. Asegúrate de que ese módulo tenga la función implementada para completar el pipeline de punta a punta.
+- ✅ El pipeline principal está completo y funcional en tres etapas: carga/preparación, entrenamiento y evaluación.
+- ✅ Se generan artefactos de salida útiles para evidencia académica:
+  - `outputs/01_matriz_confusion.png`
+  - `outputs/02_arbol_decision.png`
+- ⚠️ Dependencia externa crítica: la primera ejecución requiere acceso a Kaggle para descargar datos.
+- ⚠️ Para ejecución estable en entorno institucional, se recomienda:
+  1. Pre-cargar `data/Admission_Predict.csv` en el servidor.
+  2. Ejecutar con entorno virtual y `requirements.txt`.
+  3. Definir responsable de validación periódica de métricas del modelo.
+
+## Estado recomendado
+
+**Listo para despliegue académico/institucional controlado**, con la condición de asegurar disponibilidad del dataset y entorno de ejecución reproducible.
 
 ## Créditos
 
-- Autor original del proyecto: **Jhederith Quitian**
-- README en español y guía de uso: **GitHub Copilot**
+- **GitHub Copilot (asistente técnico)**
+- **quitian07 (Esteban Quitian)**
+- **oscari2606 (Oscar Ivan)**
+- **Jhederith**
